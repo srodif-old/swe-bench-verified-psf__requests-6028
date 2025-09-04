@@ -396,6 +396,16 @@ ENCODED_PASSWORD = compat.quote(PASSWORD, '')
             'http://complex.url.com/path?query=yes',
             ('', '')
         ),
+        (
+            # Test case for Python 3.8.12 proxy auth bug - username with no password
+            'http://user@proxy.example.com:8080',
+            ('user', '')
+        ),
+        (
+            # Test case for username with empty password
+            'http://user:@proxy.example.com:8080',
+            ('user', '')
+        ),
     ))
 def test_get_auth_from_url(url, auth):
     assert get_auth_from_url(url) == auth
